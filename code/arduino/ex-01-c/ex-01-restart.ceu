@@ -23,8 +23,7 @@ loop do
             await 5s;
             break;
         with
-            await 50ms;
-            await PIN_02;
+            var int on = await PIN_02 until on==HIGH;
         end
     end
 end
