@@ -11,7 +11,7 @@ Componentes
 
 Sensor: Radiofrequência
 
-Atuador: LCD
+Atuador: LCD, Servo (apenas no projeto final).
 
 Entrada e Saída: RFID
 
