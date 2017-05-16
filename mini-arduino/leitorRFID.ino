@@ -1,8 +1,8 @@
 /*
 	Programa: Controle de Acesso com leitor RFID
 	Autores: Lucas Alves
-			 Gustavo Silva
-			 Luiz Andrade
+		 Gustavo Silva
+		 Luiz Andrade
 */
 
 #include <SPI.h>
@@ -40,7 +40,7 @@ void loop() {
 		conteudo.concat(String(mfrc522.uid.uidByte[i], HEX));
 	}
 	
-	  conteudo.toUpperCase();
+	conteudo.toUpperCase();
 	  
 	if (conteudo.substring(1) == "ED 78 03 CA") { //UID 1 - Chaveiro (verificar parâmetro)
 		lcd.clear();
