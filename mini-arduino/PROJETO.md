@@ -1,19 +1,19 @@
-Carrinho desviador
+Controlador de acesso
 ==================
 
 Descrição
 ---------
 
-Nessa primeira etapa do projeto, faremos um carrinho que ande em linha reta e pare, caso o sensor instalado em cima detecte algum obstáculo a frente.
+Nessa primeira etapa do projeto, faremos um controlador de acesso com leitor RFID.
 
 Componentes
 -----------
 
-Sensor: Movimento
+Sensor: Radiofrequência
 
-Atuador: Motor
+Atuador: LCD
 
-Entrada e Saída: Bluetooth, Kit Carro
+Entrada e Saída: RFID
 
 Grupo
 -----
