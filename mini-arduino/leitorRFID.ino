@@ -16,6 +16,8 @@ MFRC522 mfrc522(SS_PIN, RST_PIN);  // Cria instância MFRC522
 
 LiquidCrystal lcd(6, 7, 5, 4, 3, 2); // Inicializa a biblioteca com os números dos pins da interface
 Servo servo;
+boolean reading = false;
+unsigned long int count;
 
 void setup() {
 	Serial.begin(9600);   // Inicia a serial
@@ -24,23 +26,31 @@ void setup() {
 	lcd.begin(16, 2); //Define o número de colunas e linhas do LCD
 	servo.attach(1);
 	servo.write(0);
+	msgInicial();
 }
 
 void loop() {
-	msgInicial();
-  
-	if (!mfrc522.PICC_IsNewCardPresent()) { // Procura por novos cartões
+	
+	if(reading && millis()-count >= 3000) {
+		reading = false;
+		msgInicial();
+	}
+	
+	if(!mfrc522.PICC_IsNewCardPresent()) { // Procura por novos cartões
   		return;
 	}
   
-	if (!mfrc522.PICC_ReadCardSerial()) { // Aceita somente se um cartão for lido por vez
+	if(!mfrc522.PICC_ReadCardSerial()) { // Aceita somente se um cartão for lido por vez
     		return;
   	}
-  
+	
+	reading = true;
+	count = millis();
+	
   	Serial.print("UID da tag :"); // Exibe UID na serial
-  	String conteudo= "";
+  	String conteudo = "";
   
-  	for (byte i = 0; i < mfrc522.uid.size; i++) {
+  	for(byte i = 0; i < mfrc522.uid.size; i++) {
     		Serial.print(mfrc522.uid.uidByte[i]);
     		conteudo.concat(String(mfrc522.uid.uidByte[i]));
   	}
@@ -50,7 +60,6 @@ void loop() {
 	if(validar(conteudo)) {
     		rotacionarServo();
   	}
-	delay(3000);
 }
 
 void msgInicial() {
