@@ -44,8 +44,9 @@ void loop() {
     		return;
   	}
 	
-	reading = true;
-	count = millis();
+	if(!reading) {
+		count = millis();
+	}
 	
   	Serial.print("UID da tag :"); // Exibe UID na serial
   	String conteudo = "";
@@ -57,9 +58,10 @@ void loop() {
   
   	Serial.println();
 
-	if(validar(conteudo)) {
+	if(validar(conteudo) && !reading) {
     		rotacionarServo();
   	}
+	reading = true;
 }
 
 void msgInicial() {
@@ -97,6 +99,7 @@ bool validar(String conteudo)  {
 		lcd.print("Seja bem-vindo!");
 		return true;
 	}
+	
 	//Cartões desconhecidos
 	lcd.print("Ola, aluno!");
 	lcd.setCursor(0,1);
