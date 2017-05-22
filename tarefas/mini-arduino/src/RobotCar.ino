@@ -39,8 +39,6 @@ float obstaculoFrente;
 
 Ultrasonic ultrasonic(15, 14);
 
-
-
 void setup() {
   Serial.begin(9600);
   pinMode(19, OUTPUT);
@@ -79,6 +77,7 @@ int noteDurations[] = {
 const int melodyLength = 24;
 
 void playSong(int* songPitches, int* songNoteDuration, int songLength) {
+  //FONTE: https://www.arduino.cc/en/Tutorial/toneMelody
   // iterate over the notes of the melody:
   for (int i = 0; i < songLength; ++i) {
 
@@ -120,8 +119,6 @@ void viraDireita() {
   motorR.run(MOTOR_RBACKWARD);
   motorL.run(MOTOR_LFORWARD);
 }
-
-int i;
 
 void loop() {
   switch(estado) {
@@ -185,16 +182,16 @@ void loop() {
       if (millis() - timestampEstado > SERVO_DELAY) {
         motorL.run(MOTOR_LFORWARD);
         motorR.run(MOTOR_RFORWARD);
+        //alteraVelocidade(MOTOR_SPD);
         estado = mudaEstado(E_EMFRENTE);
       }
     break;
 
     case E_FERROU:
       Serial.println("vish");
-      while(1)
-      {
+      while(1) {
         playSong(melody, noteDurations, melodyLength);
-      }//morreu      
+      } //morreu
     break;
   }
   delay(16);
