@@ -20,93 +20,90 @@ boolean reading = false;
 unsigned long int count;
 
 void setup() {
-	Serial.begin(9600);   // Inicia a serial
-	SPI.begin();      // Inicia  SPI bus
-	mfrc522.PCD_Init();   // Inicia MFRC522
-	lcd.begin(16, 2); //Define o número de colunas e linhas do LCD
-	servo.attach(1);
-	servo.write(0);
-	msgInicial();
+//  Serial.begin(9600);   // Inicia a serial
+  SPI.begin();      // Inicia  SPI bus
+  mfrc522.PCD_Init();   // Inicia MFRC522
+  lcd.begin(16, 2); //Define o número de colunas e linhas do LCD
+  servo.attach(8);
+  msgInicial();
 }
 
 void loop() {
-	
-	if(reading && millis()-count >= 3000) {
-		reading = false;
-		msgInicial();
-	}
-	
-	if(!mfrc522.PICC_IsNewCardPresent()) { // Procura por novos cartões
-  		return;
-	}
   
-	if(!mfrc522.PICC_ReadCardSerial()) { // Aceita somente se um cartão for lido por vez
-    		return;
-  	}
-	
-	if(!reading) {
-		count = millis();
-	}
-	
-  	Serial.print("UID da tag :"); // Exibe UID na serial
-  	String conteudo = "";
+  if(reading && millis()-count >= 3000) {
+    reading = false;
+    msgInicial();
+  }
   
-  	for(byte i = 0; i < mfrc522.uid.size; i++) {
-    		Serial.print(mfrc522.uid.uidByte[i]);
-    		conteudo.concat(String(mfrc522.uid.uidByte[i]));
-  	}
+  if(!mfrc522.PICC_IsNewCardPresent()) { // Procura por novos cartões
+      return;
+  }
   
-  	Serial.println();
+  if(!mfrc522.PICC_ReadCardSerial()) { // Aceita somente se um cartão for lido por vez
+        return;
+    }
+  
+  reading = true;
+  count = millis();
+  
+//  Serial.print("UID da tag :"); Exibe UID na serial
+    String conteudo = "";
+  
+    for(byte i = 0; i < mfrc522.uid.size; i++) {
+//        Serial.print(mfrc522.uid.uidByte[i]);
+        conteudo.concat(String(mfrc522.uid.uidByte[i]));
+    }
+  
+    //Serial.println();
 
-	if(validar(conteudo) && !reading) {
-    		rotacionarServo();
-  	}
-	reading = true;
+  if(validar(conteudo)) {
+        rotacionarServo();
+    }
 }
 
 void msgInicial() {
-	lcd.clear();
-	lcd.print(" Aproxime o seu");  
-	lcd.setCursor(0,1);
-	lcd.print("cartao do leitor");
+  servo.write(90);
+  lcd.clear();
+  lcd.print(" Aproxime o seu");  
+  lcd.setCursor(0,1);
+  lcd.print("cartao do leitor");
 }
 
 bool validar(String conteudo)  {
-  	lcd.clear();
-  	lcd.setCursor(0,0);
+    lcd.clear();
+    lcd.setCursor(0,0);
   
-  	if(conteudo == "2297012136") { //UID 1 - Chaveiro
-    		lcd.print("Ola, professor!");
-    		lcd.setCursor(0,1);
-    		lcd.print("Acesso liberado!");
-    		return true;
- 	}
-	if(conteudo == "174184252154") { //UID 2 - RioCard do Lucas
-	   	lcd.print("Ola, Lucas!");
-	    	lcd.setCursor(0,1);
-	    	lcd.print("Seja bem-vindo!");
-	    	return true;
-	}
-	if(conteudo == "23518863174") { //UID 3 - BU do Luiz
-	    	lcd.print("Ola, Luiz!");
-	    	lcd.setCursor(0,1);
-	    	lcd.print("Seja bem-vindo!");
-	    	return true;
-	}
-	if(conteudo == "11111186222") { //UID 4 - RioCard do Gustavo
-		lcd.print("Ola, Gustavo!");
-		lcd.setCursor(0,1);
-		lcd.print("Seja bem-vindo!");
-		return true;
-	}
-	
-	//Cartões desconhecidos
-	lcd.print("Ola, aluno!");
-	lcd.setCursor(0,1);
-	lcd.print("Acesso Negado!");
-	return false;
+    if(conteudo == "2297012136") { //UID 1 - Chaveiro
+        lcd.print("Ola, professor!");
+        lcd.setCursor(0,1);
+        lcd.print("Acesso liberado!");
+        return true;
+  }
+  if(conteudo == "174184252154") { //UID 2 - RioCard do Lucas
+      lcd.print("Ola, Lucas!");
+        lcd.setCursor(0,1);
+        lcd.print("Seja bem-vindo!");
+        return true;
+  }
+  if(conteudo == "23518863174") { //UID 3 - BU do Luiz
+        lcd.print("Ola, Luiz!");
+        lcd.setCursor(0,1);
+        lcd.print("Seja bem-vindo!");
+        return true;
+  }
+  if(conteudo == "11111186222") { //UID 4 - RioCard do Gustavo
+    lcd.print("Ola, Gustavo!");
+    lcd.setCursor(0,1);
+    lcd.print("Seja bem-vindo!");
+    return true;
+  }
+  //Cartões desconhecidos
+  lcd.print("Ola, aluno!");
+  lcd.setCursor(0,1);
+  lcd.print("Acesso Negado!");
+  return false;
 }
 
 void rotacionarServo() {
-	servo.write(180);
+  servo.write(180);
 }
