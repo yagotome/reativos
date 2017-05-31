@@ -19,12 +19,14 @@ int main (int argc, char* args[]) {
 	SDL_Rect r1 = {10, 90, 50, 50}, r2 = {330, 90, 50, 50};
 	SDL_Event e;
 	
-	float speed1 = 0.04, speed2 = 0.03, s1, s2;
-	int dir1=0, dir2=0;
+	float speed1 = 2, speed2 = 1;
+	int dir1=0, dir2=0, dt = 0, time = SDL_GetTicks();
 
 	while(1) {
 
-		SDL_PollEvent(&e);
+		SDL_WaitEventTimeout(&e, 1);
+		dt = SDL_GetTicks() - time;
+		time = SDL_GetTicks();
 		
 		/* Eventos */
 		if(e.type == SDL_QUIT) {
@@ -54,33 +56,30 @@ int main (int argc, char* args[]) {
 			}
 		}
 
-		s1 += speed1;
-		s2 += speed2;
-
 		/* Animações */
 		if(dir1 == 0) {
-			r1.x += (int)s1;
+			r1.x += speed1 * dt;
 			if(r1.x > 260) {
-				r1.x = 260;
+				r1.x = 260 ;
 				dir1 = 1;
 			}
 		}
 		else if(dir1 == 1) {
-			r1.y += (int)s1;
+			r1.y += speed1 * dt;
 			if(r1.y > 340) {
 				r1.y = 340;
 				dir1 = 2;
 			}
 		}
 		else if(dir1 == 2) {
-			r1.x -= (int)s1;
+			r1.x -= speed1 * dt;
 			if(r1.x < 10) {
 				r1.x = 10;
 				dir1 = 3;
 			}
 		}
 		else {
-			r1.y -= (int)s1;
+			r1.y -= speed1 * dt;
 			if(r1.y < 90) {
 				r1.y = 90;
 				dir1 = 0;
@@ -88,36 +87,33 @@ int main (int argc, char* args[]) {
 		}
 
 		if(dir2 == 0) {
-			r2.x += (int)s2;
+			r2.x += speed2 * dt;
 			if(r2.x > 580) {
 				r2.x = 580;
 				dir2 = 1;
 			}
 		}
 		else if(dir2 == 1) {
-			r2.y += (int)s2;
+			r2.y += speed2 * dt;
 			if(r2.y > 340) {
 				r2.y = 340;
 				dir2 = 2;
 			}
 		}
 		else if(dir2 == 2) {
-			r2.x -= (int)s2;
+			r2.x -= speed2 * dt;
 			if(r2.x < 330) {
 				r2.x = 330;
 				dir2 = 3;
 			}
 		}
 		else {
-			r2.y -= (int)s2;
+			r2.y -= speed2 * dt;
 			if(r2.y < 90) {
 				r2.y = 90;
 				dir2 = 0;
 			}
 		}
-
-		if(s1 >= 1) s1 = 0;
-		if(s2 >= 1) s2 = 0;
 		
 		/* Redesenho */
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0x00);
