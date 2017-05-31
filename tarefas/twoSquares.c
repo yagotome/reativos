@@ -19,8 +19,7 @@ int main (int argc, char* args[]) {
 	SDL_Rect r1 = {10, 90, 50, 50}, r2 = {330, 90, 50, 50};
 	SDL_Event e;
 	
-	float speed1 = 2, speed2 = 1;
-	int dir1=0, dir2=0, dt = 0, time = SDL_GetTicks();
+	int dir1=0, dir2=0, dt = 0, time = SDL_GetTicks(), speed1 = 2, speed2 = 1;
 
 	while(1) {
 
