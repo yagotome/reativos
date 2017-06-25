@@ -3,7 +3,7 @@
 ## Integração de SDL com Arduíno
 
 ### Objetivo do projeto
-Integrar o [Sonic, jump!](https://github.com/lucascomp/mini-game-SDL) com um controle remoto feito em arduíno e realizar algumas melhorias.
+Integrar o [Sonic, jump!](https://github.com/lucascomp/sonic-jump-arduino-sdl) com um controle remoto feito em arduíno e realizar algumas melhorias.
 
 ### Melhorias (tarefas):
 - [ ] Integração com um controle remoto (Será feito pela dupla nos tempos de aula)
@@ -17,4 +17,4 @@ Integrar o [Sonic, jump!](https://github.com/lucascomp/mini-game-SDL) com um con
 * [Lucas Alves](https://github.com/lucascomp)
 * [Yago Tomé](https://github.com/yagotome)
 
-[Repositório do projeto](#TODO)
+[Repositório do projeto](https://github.com/yagotome/sonic-jump-arduino-sdl)
