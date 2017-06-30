@@ -6,7 +6,7 @@
 Integrar o [Sonic, jump!](https://github.com/lucascomp/sonic-jump-arduino-sdl) com um controle remoto feito em arduíno e realizar algumas melhorias.
 
 ### Melhorias (tarefas):
-- [ ] Integração com um controle remoto (Será feito pela dupla nos tempos de aula)
+- [x] Integração com arduíno: botões up e down (Lucas)
 - [ ] Criar tela inicial / game over (A definir)
 - [x] Mudar tratamento de input para checkar estado das teclas em vez de aguardar por eventos (Yago)
 - [x] Criar pontução / record (Yago)
