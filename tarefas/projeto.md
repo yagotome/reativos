@@ -7,7 +7,7 @@ Integrar o [Sonic, jump!](https://github.com/lucascomp/sonic-jump-arduino-sdl) c
 
 ### Melhorias (tarefas):
 - [x] Integração com arduíno: botões up e down (Lucas)
-- [ ] Criar tela inicial / game over (A definir)
+- [x] Criar tela inicial / game over (Lucas)
 - [x] Mudar tratamento de input para checkar estado das teclas em vez de aguardar por eventos (Yago)
 - [x] Criar pontução / record (Yago)
 - [x] Diminuir aceleração da queda quando se segura a seta para cima (Lucas)
