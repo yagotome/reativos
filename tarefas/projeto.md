@@ -12,7 +12,7 @@ Integrar o [Sonic, jump!](https://github.com/lucascomp/sonic-jump-arduino-sdl) c
 - [x] Criar pontução / record (Yago)
 - [x] Diminuir aceleração da queda quando se segura a seta para cima (Lucas)
 - [x] Mudar tratamento de colisão usando cálculo do raio do sprite circular (Lucas)
-- [ ] Especial: Ignora colisão, sprite girando, piscar fundo de tela, estrelas aleatórias no céu, aumento de velocidade (Yago)
+- [x] Especial: Ignora colisão, sprite girando, sonic piscando, estrelas no céu para dar especial, aumento de velocidade (Yago)
 
 #### Dupla
 * [Lucas Alves](https://github.com/lucascomp)
